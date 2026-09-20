@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/pulkitmittal19/stylelens/main/docs/logo.svg" alt="" width="84" height="84">
+<img src="https://raw.githubusercontent.com/pulkitmittal19/layerlens/main/docs/logo.svg" alt="" width="84" height="84">
 
-# stylelens
+# layerlens
 
 **Hover any element and find out whether it is actually on your design system.**
 
 Which token. Which type role. Which cascade layer won.
 
-<img src="https://raw.githubusercontent.com/pulkitmittal19/stylelens/main/docs/panel.svg" alt="stylelens panels: one element on the design system, one off it" width="740">
+<img src="https://raw.githubusercontent.com/pulkitmittal19/layerlens/main/docs/panel.svg" alt="layerlens panels: one element on the design system, one off it" width="740">
 
-[![npm](https://img.shields.io/npm/v/stylelens?color=0b0b0c&labelColor=0b0b0c&label=npm)](https://www.npmjs.com/package/stylelens)
+[![npm](https://img.shields.io/npm/v/layerlens?color=0b0b0c&labelColor=0b0b0c&label=npm)](https://www.npmjs.com/package/layerlens)
 
 <sub>MIT · no runtime dependencies of its own · React only for the overlay</sub>
 
@@ -36,23 +36,23 @@ No inspector reports which layer won. This one does.
 ## Install
 
 ```bash
-npm i -D stylelens
+npm i -D layerlens
 ```
 
 ```tsx
-import { StyleLens } from 'stylelens/react'
+import { LayerLens } from 'layerlens/react'
 
 <>
   <App />
-  {import.meta.env.DEV && <StyleLens />}
+  {import.meta.env.DEV && <LayerLens />}
 </>
 ```
 
 That's it. Zero configuration on a Tailwind v4 project.
 
-**Two entries.** `stylelens` is the engine — no React anywhere in its import
+**Two entries.** `layerlens` is the engine — no React anywhere in its import
 graph, so a Playwright script or a CI check can use it with React not
-installed at all. `stylelens/react` is the overlay, and re-exports the engine, so
+installed at all. `layerlens/react` is the overlay, and re-exports the engine, so
 a React app still writes one import.
 
 ## Three surfaces, one reader
@@ -60,7 +60,7 @@ a React app still writes one import.
 |  | For | How |
 |---|---|---|
 | **Overlay** | people | a draggable crosshair button |
-| **`window.__styleLens`** | agents | plain JSON, no protocol |
+| **`window.__layerLens`** | agents | plain JSON, no protocol |
 | **`new Lens()`** | CI | fail a build when the count goes up |
 
 All three call the same function, so the panel a designer reads and the numbers
@@ -109,13 +109,13 @@ go, click it. <kbd>Esc</kbd> unlocks.
 ### Agent API
 
 ```js
-__styleLens.readSelector('.contact-name')   // one element
-__styleLens.readPoint(x, y)                 // pairs with an annotation's coords
-__styleLens.audit()                         // every off-system value, grouped
-__styleLens.audit({ root: 'table', properties: ['type'] })
-__styleLens.roles()                         // what it thinks your ladder is
-__styleLens.enrich(annotation)              // an annotation + what it measures
-__styleLens.describe(reading)               // that reading as one readable line
+__layerLens.readSelector('.contact-name')   // one element
+__layerLens.readPoint(x, y)                 // pairs with an annotation's coords
+__layerLens.audit()                         // every off-system value, grouped
+__layerLens.audit({ root: 'table', properties: ['type'] })
+__layerLens.roles()                         // what it thinks your ladder is
+__layerLens.enrich(annotation)              // an annotation + what it measures
+__layerLens.describe(reading)               // that reading as one readable line
 ```
 
 `format(reading)` gives the four-line block instead of a single line.
@@ -132,7 +132,7 @@ if (offSystem > budget) process.exit(1)
 
 A full-page audit runs in about **17ms**.
 
-> **Constructed in a page, not in Node.** Importing `stylelens` in Node is fine
+> **Constructed in a page, not in Node.** Importing `layerlens` in Node is fine
 > and needs no React — but `new Lens()` reads the document's custom properties
 > as it is built, so construct it inside the page: Playwright or Puppeteer's
 > `page.evaluate`, a devtools console, or your bundled app. Calling it in plain
@@ -144,7 +144,7 @@ A full-page audit runs in about **17ms**.
 Everything is optional.
 
 ```tsx
-<StyleLens
+<LayerLens
   rolePattern={/^type-/}              // default /^text-[a-z][\w-]*$/
   tokenPrefixes={['--ds-']}           // default: every :root custom property
   properties={['color', 'gap']}       // default: type, colour, spacing, shape
@@ -180,35 +180,35 @@ important declarations, which is the part people misremember.
 
 ## Alongside an annotation tool
 
-stylelens needs nothing else installed. But it plays well with
+layerlens needs nothing else installed. But it plays well with
 [agentation](https://agentation.com), Vercel Comments and friends, which tell an
 agent *where* someone pointed without saying what that element measures.
 
-**They don't fight.** While locked, stylelens intercepts clicks — so it skips
+**They don't fight.** While locked, layerlens intercepts clicks — so it skips
 known floating toolbars by default, and `overlaySelectors` adds your own.
 
 **They cooperate through the page, not through each other.** Hand an
 annotation to `enrich` and get it back with the measurement attached:
 
 ```js
-import { enrich, describe } from 'stylelens'
+import { enrich, describe } from 'layerlens'
 
 enrich(annotation)
 // { comment: "this looks tight",
 //   elementPath: "#page > .row > #btn",
-//   styleLens: { type: {...}, readings: [...], offSystem: [...] } }
+//   layerLens: { type: {...}, readings: [...], offSystem: [...] } }
 
-describe(enrich(annotation).styleLens)
+describe(enrich(annotation).layerLens)
 // "14px / 500 / 20px · text-label-md · layer utilities"
 // "13px / 450 / 13px · no role, nearest text-label-md · UNLAYERED"
 ```
 
 `enrich` accepts `elementPath`, `selector`, `element` or `x`/`y`, so it works
 with agentation, Vercel Comments and anything else that reports where a click
-landed. stylelens imports nothing from any of them. Both are on the global too —
-`__styleLens.enrich(...)`, `__styleLens.describe(...)`.
+landed. layerlens imports nothing from any of them. Both are on the global too —
+`__layerLens.enrich(...)`, `__layerLens.describe(...)`.
 
-If agentation happens to be on the page, stylelens borrows its accent colour; if
+If agentation happens to be on the page, layerlens borrows its accent colour; if
 not, it uses its own blue.
 
 ## Limits
@@ -218,7 +218,7 @@ not, it uses its own blue.
 - `@scope` proximity and transitions are not modelled in the cascade sort.
 - Token matching is by resolved value. Two tokens sharing a value are genuinely
   ambiguous — narrow with `tokenPrefixes`.
-- The overlay is React and lives at `stylelens/react`. The engine is plain DOM
+- The overlay is React and lives at `layerlens/react`. The engine is plain DOM
   and imports nothing, so it is safe to import during SSR or in Node —
   constructing a `Lens` is what needs a document.
 
@@ -237,8 +237,8 @@ alias than a `file:` dependency — you get hot reload and skip the rebuild:
 
 ```ts
 // vite.config.ts
-resolve: { alias: { 'stylelens': '/abs/path/to/stylelens/src/index.ts' } },
-server:  { fs: { allow: ['.', '/abs/path/to/stylelens'] } },
+resolve: { alias: { 'layerlens': '/abs/path/to/layerlens/src/index.ts' } },
+server:  { fs: { allow: ['.', '/abs/path/to/layerlens'] } },
 ```
 
 That second line matters. Vite refuses to serve files outside its root, and

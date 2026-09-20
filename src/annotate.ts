@@ -7,7 +7,7 @@
  *
  * Deliberately not an agentation plugin. It accepts any object that carries a
  * selector or a pair of coordinates, which covers agentation, Vercel Comments
- * and anything else that reports where a click landed. stylelens imports nothing
+ * and anything else that reports where a click landed. layerlens imports nothing
  * from any of them and never will.
  */
 import { Lens } from './inspect'
@@ -43,7 +43,7 @@ function reader(given?: Lens): Lens {
   if (given) return given
   /* The overlay's instance if one is mounted, so a configured role pattern or
      token prefix is not silently ignored here. */
-  const global = (window as unknown as { __styleLens?: { readSelector(s: string): Inspection | null } }).__styleLens
+  const global = (window as unknown as { __layerLens?: { readSelector(s: string): Inspection | null } }).__layerLens
   if (global) return { readSelector: global.readSelector.bind(global) } as Lens
   return (shared ??= new Lens())
 }
@@ -83,8 +83,8 @@ export function measure(annotation: AnnotationLike, options: EnrichOptions = {})
 export function enrich<T extends AnnotationLike>(
   annotation: T,
   options: EnrichOptions = {},
-): T & { styleLens: Inspection | null } {
-  return { ...annotation, styleLens: measure(annotation, options) }
+): T & { layerLens: Inspection | null } {
+  return { ...annotation, layerLens: measure(annotation, options) }
 }
 
 /**
@@ -128,7 +128,7 @@ export function describe(found: Inspection | null): string {
  *   Origin  inline style · UNLAYERED
  */
 export function format(found: Inspection | null): string {
-  if (!found) return 'stylelens: element not found'
+  if (!found) return 'layerlens: element not found'
 
   const label = (p: string) =>
     p === 'type' ? 'Type'

@@ -16,7 +16,7 @@
  * comes from the probe. Both matter. A bare size step declares font-size only,
  * so it must not be treated as claiming a weight it never mentioned.
  */
-import type { StyleLensConfig } from './types'
+import type { LayerLensConfig } from './types'
 
 export interface Role {
   name: string
@@ -108,7 +108,7 @@ export function discoverRoles(pattern: RegExp = DEFAULT_PATTERN): Role[] {
   return roles
 }
 
-export function configuredRoles(config: StyleLensConfig): Role[] {
+export function configuredRoles(config: LayerLensConfig): Role[] {
   if (!config.roles) return []
   return Object.entries(config.roles).map(([name, r]) => ({ name, ...r }))
 }

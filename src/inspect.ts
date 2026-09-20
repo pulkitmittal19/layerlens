@@ -1,11 +1,11 @@
 /* The reader. One element in, one Inspection out.
  *
- * Everything else in stylelens is a surface over this function: the overlay draws
+ * Everything else in layerlens is a surface over this function: the overlay draws
  * it, the agent API returns it as JSON, the audit runs it across a page. There
  * is one measurement path, so the panel a designer reads and the numbers an
  * agent acts on can never disagree.
  */
-import type { Audit, StyleLensConfig, Inspection, Origin, Reading, Verdict } from './types'
+import type { Audit, LayerLensConfig, Inspection, Origin, Reading, Verdict } from './types'
 import { canonical, isColourProperty } from './color'
 import { buildTokenTable, tokenFor, type TokenTable } from './tokens'
 import { winningRule } from './cascade'
@@ -45,7 +45,7 @@ export class Lens {
   private roles: Role[]
   private properties: string[]
 
-  constructor(private config: StyleLensConfig = {}) {
+  constructor(private config: LayerLensConfig = {}) {
     /* A Lens reads the document as it is constructed, so it needs a real page.
        Importing this module does not — that is the point of the split — but a
        CI script that forgets to open one used to get
@@ -53,7 +53,7 @@ export class Lens {
        in the token table, which says nothing about what to do. */
     if (typeof document === 'undefined' || typeof getComputedStyle === 'undefined') {
       throw new Error(
-        'stylelens: new Lens() needs a browser document — it reads the page\'s custom ' +
+        'layerlens: new Lens() needs a browser document — it reads the page\'s custom ' +
         'properties as it is constructed. Run it inside the page (Playwright/Puppeteer ' +
         '`page.evaluate`, a devtools console, a bundled app), not in plain Node.',
       )

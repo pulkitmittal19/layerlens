@@ -1,6 +1,6 @@
 {
-  "name": "stylelens",
-  "version": "0.2.0",
+  "name": "layerlens",
+  "version": "0.3.0",
   "description": "Hover any element and see whether it is actually on your design system — which token, which type role, and which cascade layer won.",
   "keywords": [
     "design-system",
@@ -15,11 +15,11 @@
   "author": "Pulkit Mittal (https://github.com/pulkitmittal19)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pulkitmittal19/stylelens.git"
+    "url": "git+https://github.com/pulkitmittal19/layerlens.git"
   },
-  "homepage": "https://github.com/pulkitmittal19/stylelens#readme",
+  "homepage": "https://github.com/pulkitmittal19/layerlens#readme",
   "bugs": {
-    "url": "https://github.com/pulkitmittal19/stylelens/issues"
+    "url": "https://github.com/pulkitmittal19/layerlens/issues"
   },
   "type": "module",
   "sideEffects": false,

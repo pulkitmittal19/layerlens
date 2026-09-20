@@ -1,6 +1,6 @@
 /* Tests for the parts that need no browser.
  *
- * stylelens is mostly a reader of live CSS, and most of it genuinely cannot be
+ * layerlens is mostly a reader of live CSS, and most of it genuinely cannot be
  * tested without a document. But the arithmetic underneath — specificity,
  * which role a value is nearest, how far apart two boxes are, how a colour is
  * written for a human — is pure, and it is also where a quiet wrong answer

@@ -1,4 +1,4 @@
-/* stylelens — public types.
+/* layerlens — public types.
  *
  * The shape of a reading is the contract between the overlay (for people), the
  * agent API (for coding agents) and the page audit. One reader, three surfaces.
@@ -40,7 +40,7 @@ export interface Reading {
   nearestToken?: string
 }
 
-/** Everything stylelens knows about one element. */
+/** Everything layerlens knows about one element. */
 export interface Inspection {
   selector: string
   tagName: string
@@ -68,7 +68,7 @@ export interface Audit {
   groups: Array<{ property: string; value: string; count: number; examples: string[] }>
 }
 
-export interface StyleLensConfig {
+export interface LayerLensConfig {
   /**
    * Named type roles. Omit to auto-discover Tailwind v4 `--text-*` roles from
    * the emitted theme, which is the zero-config path.
@@ -95,6 +95,6 @@ export interface StyleLensConfig {
   ignore?: string[]
   /** Attach the agent API to `window`. Default true. */
   exposeGlobal?: boolean
-  /** Global name. Default `__styleLens`. */
+  /** Global name. Default `__layerLens`. */
   globalName?: string
 }

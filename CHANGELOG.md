@@ -2,23 +2,45 @@
 
 Notable changes, newest first. Dates are the day the version was tagged.
 
+## 0.3.0 — 2026-09-21
+
+### Renamed
+
+- **The package is `layerlens`.** It was `stylelens` right up to the first
+  publish, and npm refused it: one character from `stylelint`, close enough that
+  the registry's typosquatting filter reads it as an attempt at that package.
+  Scoping it would have kept the word, but a name you have to say as
+  "at-my-username-slash" is not a name. Nothing had been published under the old
+  one, so nobody has an install to migrate — this is release one.
+
+  ```diff
+  - import { StyleLens } from 'stylelens/react'
+  + import { LayerLens } from 'layerlens/react'
+  ```
+
+  Everything the old name touched moved with it: `window.__styleLens` is
+  `window.__layerLens`, `StyleLensConfig` is `LayerLensConfig`, the field
+  `enrich()` adds to an annotation is `layerLens`, and the ignore attribute is
+  `data-layerlens-ignore`. Entries below this one are written in the new names —
+  the old ones never reached npm, so there is nothing to be faithful to.
+
 ## 0.2.0 — 2026-09-20
 
 ### Breaking
 
-- **`StyleLens` moved to `stylelens/react`.** The package now has two entries: the
-  engine at `stylelens`, which imports no React at all, and the overlay at
-  `stylelens/react`, which re-exports the engine so a React app still writes one
+- **`LayerLens` moved to `layerlens/react`.** The package now has two entries: the
+  engine at `layerlens`, which imports no React at all, and the overlay at
+  `layerlens/react`, which re-exports the engine so a React app still writes one
   import.
 
   ```diff
-  - import { StyleLens } from 'stylelens'
-  + import { StyleLens } from 'stylelens/react'
+  - import { LayerLens } from 'layerlens'
+  + import { LayerLens } from 'layerlens/react'
   ```
 
   `package.json` had called React an optional peer dependency since the first
   commit and it was never true — the single entry re-exported the overlay, so
-  `import { Lens } from 'stylelens'` pulled in `react`, `react-dom` and
+  `import { Lens } from 'layerlens'` pulled in `react`, `react-dom` and
   `react/jsx-runtime`, and threw `ERR_MODULE_NOT_FOUND` in a project without
   them. The CI surface the README documents could not run at all. It can now.
 
@@ -47,7 +69,7 @@ Notable changes, newest first. Dates are the day the version was tagged.
   is a string on both.
 - `new Lens()` outside a browser now says what to do instead of throwing
   `ReferenceError: getComputedStyle is not defined` from inside the token table.
-- `window.__styleLens.version` reported `0.1.0`. The version was written in three
+- `window.__layerLens.version` reported `0.1.0`. The version was written in three
   places; it is one module now, with a test.
 
 ### Added
