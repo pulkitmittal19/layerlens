@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/logo.svg" alt="" width="84" height="84">
+<img src="https://raw.githubusercontent.com/pulkitmittal19/stylelens/main/docs/logo.svg" alt="" width="84" height="84">
 
 # stylelens
 
@@ -8,7 +8,9 @@
 
 Which token. Which type role. Which cascade layer won.
 
-<img src="docs/panel.svg" alt="stylelens panels: one element on the design system, one off it" width="740">
+<img src="https://raw.githubusercontent.com/pulkitmittal19/stylelens/main/docs/panel.svg" alt="stylelens panels: one element on the design system, one off it" width="740">
+
+[![npm](https://img.shields.io/npm/v/stylelens?color=0b0b0c&labelColor=0b0b0c&label=npm)](https://www.npmjs.com/package/stylelens)
 
 <sub>MIT · no runtime dependencies of its own · React only for the overlay</sub>
 
@@ -33,11 +35,8 @@ No inspector reports which layer won. This one does.
 
 ## Install
 
-Not on npm yet. Install from the repository — the package builds itself on
-install, so there is nothing else to run:
-
 ```bash
-npm i -D github:pulkitmittal19/stylelens
+npm i -D stylelens
 ```
 
 ```tsx
