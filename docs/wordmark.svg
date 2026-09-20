@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="56" viewBox="0 0 260 56" role="img" aria-label="stylelens">
+  <rect width="56" height="56" rx="13" fill="#1A1A1A"/>
+  <g transform="translate(11.7 11.7) scale(1.3611)" fill="none" stroke="#0087FF" stroke-width="2" stroke-linecap="round">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="22" x2="18" y1="12" y2="12"/>
+    <line x1="6" x2="2" y1="12" y2="12"/>
+    <line x1="12" x2="12" y1="6" y2="2"/>
+    <line x1="12" x2="12" y1="22" y2="18"/>
+  </g>
+  <circle cx="28" cy="28" r="3.5" fill="#0087FF"/>
+  <text x="72" y="36" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="26" fill="#1A1A1A">stylelens</text>
+</svg>

@@ -1,0 +1,79 @@
+{
+  "name": "stylelens",
+  "version": "0.2.0",
+  "description": "Hover any element and see whether it is actually on your design system — which token, which type role, and which cascade layer won.",
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "css-layers",
+    "inspector",
+    "devtools",
+    "agentation",
+    "ai-agents"
+  ],
+  "license": "MIT",
+  "author": "Pulkit Mittal (https://github.com/pulkitmittal19)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pulkitmittal19/stylelens.git"
+  },
+  "homepage": "https://github.com/pulkitmittal19/stylelens#readme",
+  "bugs": {
+    "url": "https://github.com/pulkitmittal19/stylelens/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run typecheck && npm test",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="212" viewBox="0 0 740 212" role="img" aria-label="Two stylelens panels: one element on the design system, one off it">
+  <defs>
+    <style>
+      .m { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px }
+      .s { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif }
+      .lbl { fill: rgba(255,255,255,.34); font-size: 11px }
+      .val { fill: #FFFFFF }
+      .ok  { fill: #0087FF }
+      .bad { fill: #FF383C }
+      .hd  { fill: #FFFFFF; font-size: 12.5px }
+    </style>
+  </defs>
+
+  <rect width="740" height="212" rx="14" fill="#F4F4F5"/>
+
+  <!-- on system -->
+  <g>
+    <rect x="28" y="40" width="322" height="102" rx="12" fill="#1A1A1A"/>
+    <text class="s hd" x="41" y="64">Olivia Rhye</text>
+    <line x1="41" y1="79" x2="337" y2="79" stroke="#FFFFFF" stroke-opacity=".10"/>
+    <text class="s lbl" x="41" y="100">Type</text>
+    <text class="m val" x="97" y="100">14px / 500 / 20px</text>
+    <text class="m ok" x="337" y="100" text-anchor="end">text-label-md</text>
+    <text class="s lbl" x="41" y="125">Colour</text>
+    <rect x="97" y="116" width="10" height="10" rx="3" fill="#101828" stroke="#FFFFFF" stroke-opacity=".28"/>
+    <text class="m val" x="114" y="125">#101828</text>
+    <text class="m ok" x="337" y="125" text-anchor="end">--text-primary</text>
+  </g>
+
+  <!-- off system -->
+  <g>
+    <rect x="390" y="40" width="322" height="132" rx="12" fill="#1A1A1A"/>
+    <text class="s hd" x="403" y="64">Download</text>
+    <text class="s bad" x="699" y="64" text-anchor="end" font-size="11">1 off</text>
+    <line x1="403" y1="79" x2="699" y2="79" stroke="#FFFFFF" stroke-opacity=".10"/>
+    <text class="s lbl" x="403" y="100">Type</text>
+    <text class="m val" x="459" y="100">13px / 450 / 13px</text>
+    <text class="m bad" x="699" y="100" text-anchor="end">→ text-label-md</text>
+    <text class="s lbl" x="403" y="125">Colour</text>
+    <rect x="459" y="116" width="10" height="10" rx="3" fill="#344054" stroke="#FFFFFF" stroke-opacity=".28"/>
+    <text class="m val" x="476" y="125">#344054</text>
+    <text class="m ok" x="699" y="125" text-anchor="end">--text-secondary</text>
+    <rect x="403" y="139" width="66" height="17" rx="5" fill="#FF383C" fill-opacity=".16"/>
+    <text class="s bad" x="411" y="151" font-size="10.5">unlayered</text>
+  </g>
+</svg>

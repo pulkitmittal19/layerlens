@@ -1,0 +1,29 @@
+# Typecheck, test, build — on every push and every pull request.
+#
+# Nothing here is clever. It exists because every defect this project has had
+# was found by a person looking at it: a 40ms hover read, a mousemove storm, a
+# React import that made an "optional" peer dependency a lie, a version string
+# four releases stale. None of those needed a browser to catch.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      # `npm ci` runs `prepare`, which builds — so a broken build fails here
+      # before the explicit step below even runs. Both are kept: the message
+      # from a failed build step is the one a person can read.
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
